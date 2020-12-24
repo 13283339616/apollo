@@ -11,7 +11,7 @@ var allProperties = make(map[string]string)
 var changeChan = make(chan interface{})
 var configChan = make(chan interface{})
 
-func initAll(path string) {
+func InitAll(path string) {
 	sep := string(os.PathSeparator)
 	initProperties = ReadProperties(path + sep + "config.properties")
 
