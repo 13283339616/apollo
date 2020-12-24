@@ -11,15 +11,14 @@ var allProperties = make(map[string]string)
 var changeChan = make(chan interface{})
 var configChan = make(chan interface{})
 
-func init() {
-	dir, _ := os.Getwd()
+func initAll(path string) {
 	sep := string(os.PathSeparator)
-	initProperties = ReadProperties(dir + sep + "resources" + sep + "config.properties")
+	initProperties = ReadProperties(path + sep + "config.properties")
 
 	if includeFilePath, ok := initProperties["five.include"]; ok {
 		includeFilePathList := strings.Split(includeFilePath, ",")
 		for _, includeFilePath := range includeFilePathList {
-			includeFileProperty := ReadProperties(dir + sep + "resources" + sep + includeFilePath + ".properties")
+			includeFileProperty := ReadProperties(path + sep + includeFilePath + ".properties")
 			for k, v := range includeFileProperty {
 				initProperties[k] = v
 			}
